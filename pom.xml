@@ -12,7 +12,7 @@
 	<artifactId>poc-ms1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>poc-ms1</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Demo project for Spring Boot WITH SWAGGER CODEGEN</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -21,7 +21,21 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -34,6 +48,32 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>io.swagger.codegen.v3</groupId>
+				<artifactId>swagger-codegen-maven-plugin</artifactId>
+				<version>3.0.30</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>
+								${project.basedir}/src/main/resources/api/api.yml
+							</inputSpec>
+							<language>spring</language>
+							<apiPackage>com.example.pocms1.api</apiPackage>
+							<modelPackage>com.example.pocms1.model</modelPackage>
+							<output>${project.build.directory}/generated-sources</output>
+							<configOptions>
+								<generateApis>true</generateApis>
+								<generateModels>true</generateModels>
+								<sourceFolder>src/main/java/</sourceFolder>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
